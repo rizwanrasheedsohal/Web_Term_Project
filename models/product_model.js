@@ -13,7 +13,7 @@ function validateProduct(data) {
   const schema = joi.object({
     id: joi.string().min(2).max(5).required(),
     name: joi.string().min(3).max(15).required(),
-    size: joi.string().min(1).max(7).required(),
+    size: joi.string().min(1).max(10).required(),
     price: joi.number().min(0).required(),
     category: joi.string().min(0).required(),
   });

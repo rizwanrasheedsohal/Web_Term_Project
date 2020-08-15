@@ -60,8 +60,12 @@ router.get("/update/:id", loginAuth, adminAuth, async function (
 ///// Update product in DB
 router.post("/update/:id", addProductAuth, async function (req, res, next) {
   let product = await product_model.findById(req.params.id);
+
+  product.id = req.body.id;
   product.name = req.body.name;
   product.price = req.body.price;
+  product.size = req.body.size;
+  product.category = req.body.category;
 
   await product.save();
   res.redirect("/products");

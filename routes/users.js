@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var { user_model } = require("../models/user");
+var validatelogin = require("../middleware/userLoginAuth");
 
 /* GET users listing. */
 router.get("/register", async function (req, res, next) {
@@ -24,7 +25,7 @@ router.get("/login", async function (req, res, next) {
 });
 
 /* */
-router.post("/login", async function (req, res, next) {
+router.post("/login", validatelogin, async function (req, res, next) {
   let user = await user_model.findOne({
     email: req.body.email,
     password: req.body.password,

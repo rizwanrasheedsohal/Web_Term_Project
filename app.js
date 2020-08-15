@@ -8,6 +8,8 @@ var indexRouter = require("./routes/index");
 var productsRouter = require("./routes/products");
 var usersRouter = require("./routes/users");
 
+require("dotenv").config();
+
 var mongoose = require("mongoose");
 var session = require("express-session");
 
@@ -35,7 +37,7 @@ app.use(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-app.use(sessionAuth);
+// app.use(sessionAuth);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(
@@ -67,7 +69,7 @@ app.use(function (err, req, res, next) {
 });
 
 mongoose
-  .connect("mongodb://localhost/productscrud", {
+  .connect(process.env.DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
